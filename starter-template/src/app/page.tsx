@@ -1,7 +1,7 @@
 // src/app/page.tsx
 
-import GamifiedLandingPage from "@/components/GamifiedLandingPage";
+import EnhancedLandingPage from "@/components/EnhancedLandingPage";
 
-export default function LandingPage() {
-  return <GamifiedLandingPage />;
+export default function Home() {
+  return <EnhancedLandingPage />;
 }
