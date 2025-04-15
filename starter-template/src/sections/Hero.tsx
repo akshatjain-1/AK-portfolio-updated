@@ -1,85 +1,82 @@
-import memojiImage from "@/assets/images/memoji-computer.png";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
-import ArrowDown from "@/assets/icons/arrow-down.svg";
-import grainImage from "@/assets/images/grain.jpg"; 
-import StarIcon from "@/assets/icons/star.svg";
-import { HeroOrbit } from "@/components/HeroOrbit";
-import SparkleIcon from "@/assets/icons/sparkle.svg";
-import { useEffect } from "react";
+import { motion } from "framer-motion";
+import { InteractiveText3D } from "@/components/InteractiveText3D";
+import { ModernBackground } from "@/components/ModernBackground";
 
 
 export const HeroSection = () => {
+  const [rotation, setRotation] = useState<[number, number, number]>([0, 0, 0]);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const x = (clientX / window.innerWidth) * 2 - 1;
+    const y = -(clientY / window.innerHeight) * 2 + 1;
+    
+    setRotation([y * 0.5, x * 0.5, 0]);
+  };
+
   return (
-  <div className="py-32 md:py-42 lg:py-62 relative z-0 overflow-x-clip">
-    <div className="absolute inset-0 [mask-image:linear-gradient(to_top,_transparent,_black_50%,_black_100%,_transparent)]">
-      <div className="absolute inset-0 -z-30 opacity-5" style = {{
-      backgroundImage: `url(${grainImage.src})` 
-      
-      }}></div>
-      <div className="size-[620px] hero-ring"></div>
-      <div className="size-[820px] hero-ring"></div>
-      <div className="size-[1020px] hero-ring"></div>
-      <div className="size-[1220px] hero-ring"></div>
-      <HeroOrbit size = {800} rotation = {-72}>
-        <StarIcon className = " size-28 text-emerald-300" />
-      </HeroOrbit>
-      <HeroOrbit size = {550} rotation = {20}>
-        <StarIcon className = " size-12  text-emerald-300" />
-      </HeroOrbit>
-      <HeroOrbit size = {590} rotation = {98}>
-        <StarIcon className = " size-12  text-emerald-300" />
-      </HeroOrbit>
-      <HeroOrbit size = {430} rotation = {-14}>
-        <SparkleIcon className = " size-8  text-emerald-300/4" />
-      </HeroOrbit>
-      <HeroOrbit size = {440} rotation = {80}>
-        <SparkleIcon className = " size-5  text-emerald-800" />
-      </HeroOrbit>  
-      <HeroOrbit size = {530} rotation = {180}>
-        <SparkleIcon className = " size-10  text-emerald-800" />
-      </HeroOrbit>
-      <HeroOrbit size = {710} rotation = {145}>
-        <SparkleIcon className = " size-14  text-emerald-800" />
-      </HeroOrbit>
-      <HeroOrbit size = {720} rotation = {90}>
-        <div className = " size-3 rounded-full  bg-emerald-300/20" />
-      </HeroOrbit>
-      <HeroOrbit size = {520} rotation = {-45}>
-        <div className = " size-2 rounded-full  bg-emerald-300/20" />
-      </HeroOrbit>
-      <HeroOrbit size = {650} rotation = {-5}>
-        <div className = " size-2 rounded-full  bg-emerald-300/20" />
-      </HeroOrbit>
-    </div>
-    <div className="container">
-      <div className="flex flex-col items-center gap-4">
-        <Image src = {memojiImage} className = " size-[100px]" alt="memoji" width={200} height={200} /> 
-        <div className="bg-gray-950 border border-gray-850 px-4 py-1.5 inline-flex items-center gap-4">
-          <div className="bg-green-500 size-2.5 rounded-full"></div>
-          <div className="text-sm font-medium "> Available for new projects </div>
-        </div>
-      </div>
-      <div className="max-w-lg mx-auto ">
-        <h1 className="font-serif text-3xl md:text-5xl text-center mt-8 tracking-wide "> Hi, I'm <span> Akshat Jain </span> </h1>
-        <h2 className="font-serif text-xl text-center mt-4 tracking-wide "> I like learning about tech stuff</h2>
-        <p className="mt-4 text-center text-white/60 md:text-lg"> I'm a software engineer based in Bangalore, India specializing in building (and occasionally designing) exceptional websites, applications, and everything in between. </p>
-      </div>
-        <div className="flex flex-col md:flex-row justify-center items-center mt-8 gap-4">
-          <button className="inline-flex items-center gap-2 border border-white/15 px-6 h-12 rounded-xl">
-            <span className="font-semibold"> Explore my work</span>
-             
-              <ArrowDown className = "size-4"/>
+    <section 
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Modern Background */}
+      <ModernBackground />
+
+      {/* Content */}
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col items-center gap-4"
+        >
+        
+          <div className="bg-gray-950/90 border border-gray-850 px-4 py-1.5 inline-flex items-center gap-4">
+            <div className="bg-green-500 size-2.5 rounded-full"></div>
+            <div className="text-sm font-medium text-white">Available for new projects</div>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="max-w-lg mx-auto text-center mt-8"
+        >
+          <h1 className="font-serif text-3xl md:text-5xl tracking-wide text-white">
+            Hi, I'm <span className="text-[#00ffff] font-bold">Akshat Jain</span>
+          </h1>
           
+          {/* 3D Interactive Text */}
+          <div className="h-32 mt-4">
+            <InteractiveText3D
+              text="Software Engineer"
+              position={[0, 0, 0]}
+              rotation={rotation}
+              color="#00ffff"
+            />
+          </div>
+
+          <p className="mt-4 text-white/80 md:text-lg">
+            I'm a software engineer based in Bangalore, India specializing in building 
+            (and occasionally designing) exceptional websites, applications, and everything in between.
+          </p>
+        </motion.div>
+
+        <div className="flex flex-col md:flex-row justify-center items-center mt-8 gap-4">
+          <button className="inline-flex items-center gap-2 border border-white/30 px-6 h-12 rounded-xl hover:bg-white/10 transition-colors">
+            <span className="font-semibold text-white">Explore my work</span>
           </button>
-          <button className="inline-flex items-center gap-2 border border-white bg-white text-gray-900 h-12 px-6 rounded-xl">
+          <button className="inline-flex items-center gap-2 bg-white text-gray-900 h-12 px-6 rounded-xl hover:bg-white/90 transition-colors">
             <span>👋</span>
-            <span className="font-semibold "> Get in touch </span>
+            <span className="font-semibold">Get in touch</span>
           </button>
         </div>
-      
-
-    </div>
-  </div>
-
-);
+      </div>
+    </section>
+  );
 };
