@@ -3,20 +3,22 @@
 "use client";
 
 import { ModernLayout } from "@/components/layout/ModernLayout";
-import { HeroSection } from "@/sections/Hero";
-import { Header } from "@/sections/Header";
-import { ProjectsSection } from "@/sections/Projects";
-import { AboutSection } from "@/sections/About";
+import { HeroSection } from "@/components/sections/Hero";
+import { Header } from "@/components/sections/Header";
+import { ProjectsSection } from "@/components/sections/Projects";
+import { AboutSection } from "@/components/sections/About";
+import { EnhancedHero } from "@/components/sections/EnhancedHero";
 
 export default function Home() {
   return (
-    <ModernLayout>
-      <Header />
-      <main className="relative z-10">
-        <HeroSection />
+    
+      
+      <main>
+        <Header />
+         <EnhancedHero/>
         <ProjectsSection />
         <AboutSection />
       </main>
-    </ModernLayout>
+    
   );
 }

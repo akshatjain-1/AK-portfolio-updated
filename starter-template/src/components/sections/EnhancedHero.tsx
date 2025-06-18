@@ -6,6 +6,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Text3D, Float, OrbitControls } from "@react-three/drei";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { InteractiveText3D } from "../3d/InteractiveText3D";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,27 +20,8 @@ const FloatingText3D = () => {
   });
 
   return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-      <Text3D
-        ref={textRef}
-        font="/fonts/helvetiker_regular.typeface.json"
-        size={0.5}
-        height={0.2}
-        curveSegments={12}
-        bevelEnabled
-        bevelThickness={0.02}
-        bevelSize={0.02}
-        bevelOffset={0}
-        bevelSegments={5}
-      >
-        {`Hello,\nI'm a\nDeveloper`}
-        <meshStandardMaterial
-          color="#00ffff"
-          emissive="#00ffff"
-          emissiveIntensity={0.5}
-        />
-      </Text3D>
-    </Float>
+    
+      <InteractiveText3D ref = {textRef}text="Hello" position={[0, 0, 0]} />
   );
 };
 
@@ -61,7 +43,7 @@ const SkillOrb = ({ position, color }: { position: [number, number, number]; col
         emissive={color}
         emissiveIntensity={0.5}
         transparent
-        opacity={0.8}
+        opacity={2}
       />
     </mesh>
   );
@@ -89,23 +71,33 @@ export const EnhancedHero = () => {
       style={{ y }}
       className="relative h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* 3D Scene */}
+
+      {/* ---- 3D Canvas Background ---- 
       <div className="absolute inset-0">
         <Canvas camera={{ position: [0, 0, 5] }}>
           <ambientLight intensity={1} />
           <pointLight position={[10, 10, 10]} intensity={2} />
-          <FloatingText3D />
-          <SkillOrb position={[-2, 1, 0]} color="#00ffff" />
-          <SkillOrb position={[2, -1, 0]} color="#00b8ff" />
-          <SkillOrb position={[0, 2, 0]} color="#00ffd5" />
-          <OrbitControls enableZoom={false} />
+          {/* --- TEMPORARILY COMMENT OUT YOUR CUSTOM COMPONENTS --- */}
+          {/* <FloatingText3D /> */}
+          {/* <SkillOrb position={[-2, 1, 0]} color="#00ffff" /> */}
+          {/* <SkillOrb position={[2, -1, 0]} color="#00b8ff" /> */}
+          {/* <SkillOrb position={[0, 2, 0]} color="#00ffd5" /> */}
+          {/* <OrbitControls enableZoom={false} /> */}
+      {/* </Canvas>
+         <mesh>
+          <boxGeometry />
+        <meshStandardMaterial color="orange" />
+        </mesh>
         </Canvas>
       </div>
+      -------*/}
+
+      {/* 3D Scene */}
 
       {/* Content Overlay */}
-      <div className="relative z-10 text-center">
+      <div className="relative z-1 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
           className="space-y-6"

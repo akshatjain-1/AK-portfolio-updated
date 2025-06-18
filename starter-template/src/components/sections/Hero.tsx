@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { InteractiveText3D } from "@/components/InteractiveText3D";
-import { ModernBackground } from "@/components/ModernBackground";
+import { InteractiveText3D } from "@/components/3d/InteractiveText3D";
+import { ModernBackground } from "@/components/layout/ModernBackground";
 
 
 export const HeroSection = () => {

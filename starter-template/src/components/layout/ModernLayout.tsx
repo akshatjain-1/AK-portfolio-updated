@@ -89,7 +89,7 @@ export const ModernLayout: React.FC<ModernLayoutProps> = ({ children }) => {
     <div
       ref={containerRef}
       className={`relative min-h-screen overflow-hidden ${
-        theme === "dark" ? "bg-red-500" : "bg-gray-100"
+        theme === "dark" ? "bg-gray-500" : "bg-gray-100"
       }`}
       style={{
         perspective: "2000px",

@@ -5,7 +5,7 @@ import Image from "next/image";
 import grainImage from "@/assets/images/grain.jpg";
 import StarIcon from "@/assets/icons/star.svg";
 import SparkleIcon from "@/assets/icons/sparkle.svg";
-import { HeroOrbit } from "@/components/HeroOrbit";
+import { HeroOrbit } from "@/components/sections/HeroOrbit";
 import ReactIcon from "@/assets/icons/structure.png";
 import NextjsIcon from "@/assets/icons/node-js.png";
 import TailwindIcon from "@/assets/icons/css-3.png";

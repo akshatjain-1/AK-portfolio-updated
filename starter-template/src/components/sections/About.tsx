@@ -3,7 +3,7 @@
 import Image from "next/image";
 import grainImage from "@/assets/images/grain.jpg";
 import profileImage from "@/assets/images/book-cover.png"; // Replace with your actual profile image
-import { HeroOrbit } from "@/components/HeroOrbit";
+import { HeroOrbit } from "@/components/sections/HeroOrbit";
 import StarIcon from "@/assets/icons/star.svg";
 import SparkleIcon from "@/assets/icons/sparkle.svg";
 
