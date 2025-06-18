@@ -54,37 +54,26 @@ export const ModernLayout: React.FC<ModernLayoutProps> = ({ children }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  
-  
   // Smooth spring physics for mouse movement
-  const [rotateX, setRotateX] = useState(useSpring(0));
-  const [rotateY, setRotateY] = useState(useSpring(0));
+  const springConfig = { damping: 25, stiffness: 200 };
+  const rotateX = useSpring(
+    useTransform(mouseY, [0, window.innerHeight], [1, -1]),
+    springConfig
+  );
+  const rotateY = useSpring(
+    useTransform(mouseX, [0, window.innerWidth], [-1, 1]),
+    springConfig
+  );
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  // Set up window-dependent transforms after mounting
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const springConfig = { damping: 25, stiffness: 200 };
-      setRotateX(useSpring(
-        useTransform(mouseY, [0, window.innerHeight], [1, -1]),
-        springConfig
-      ));
-      setRotateY(useSpring(
-        useTransform(mouseX, [0, window.innerWidth], [-1, 1]),
-        springConfig
-      ));
-    }
-  }, [mouseX, mouseY]);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     const { clientX, clientY } = event;
     mouseX.set(clientX);
     mouseY.set(clientY);
   };
-
 
   useEffect(() => {
     if (containerRef.current) {
